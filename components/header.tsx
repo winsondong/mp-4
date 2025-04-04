@@ -1,7 +1,4 @@
-
-
 export default function Header() {
-    const linkStyling = "p-1 m-2 text-xl";
     
     return (
         <header className="h-20 flex items-center justify-center">
