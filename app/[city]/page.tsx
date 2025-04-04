@@ -1,11 +1,14 @@
 import Link from "next/link"
 import { getWeatherData } from "@/lib/get-weather-data"
-import type { WeatherResponse } from "@/types"
 
-export default async function WeatherPage({params,}: {params: { city: string }}) {
-  const { city } = params
-  const cityName = decodeURIComponent(city)
-  const weather: WeatherResponse | null = await getWeatherData(cityName)
+interface PageProps {
+  params: Promise<{ city: string }>;
+}
+
+export default async function WeatherPage({ params }: PageProps) {
+  const resolvedParams = await params;
+  const cityName = resolvedParams.city;
+  const weather = await getWeatherData(cityName);
 
   if (!weather) {
     return (
